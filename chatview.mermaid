@@ -1,0 +1,22 @@
+graph LR
+    A["ChatView.vue"] --> B("useCoState(Chat, props.chatId, [{}])");
+    B --> C{"Jazz State (Chat data)"};
+    C --> D{"Component\nRe-renders"};
+     D --> E{v-if='chat'};
+     E -- "chat undefined" --> F["Loading..."];
+     E -- "chat exists" --> G("ChatBody");
+     G -- "chat.length > 0" --> H{"Loop\nfor displayedMessages"};
+    H --> I[ChatBubble];
+     I -->J["BubbleContainer"];
+    J --> K["BubbleBody"];
+    J-->L["BubbleInfo"];
+     H-->I;
+      G -- "chat.length == 0" -->M["EmptyChatMessage"];
+    G --> N{"show more\nbutton\n(cond)"};
+      N -- "click" --> O("showMoreMessages()");
+        O --> D
+        G --> P("ChatInput");
+      P -- "submit" --> Q("handleSubmit(text)");
+      Q --> R("Message.create()");
+       R--> C;
+    C --> D;

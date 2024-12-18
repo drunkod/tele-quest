@@ -1,0 +1,14 @@
+graph LR
+    A[HomeView.vue: Render] --> B{"Is user authenticated (me.value)?"};
+    B -- Yes --> C["Group.create({ owner: me.value })"];
+    C --> D["group.addMember('everyone', 'writer')"];
+    D --> E["Chat.create([], { owner: group })"];
+    E --> F["router.push(`/chat/${chat.id}`)"]
+    F --> G["Route Change to /chat/:chatId"];
+
+    B -- No --> H[Display 'Creating a new chat...' Text];
+     H --> I[Component Unmount];
+    G --> J[ChatView.vue : Render];
+    
+    style H fill:#f9f,stroke:#333,stroke-width:2px
+        style J fill:#ccf,stroke:#333,stroke-width:2px

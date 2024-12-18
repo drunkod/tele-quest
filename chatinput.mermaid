@@ -1,0 +1,18 @@
+graph LR
+    A["Component Mount
+     '<ChatInput>' included in parent render"] --> B{"setup() Function Executes"};
+    B --> C["'inputId' Created (random id)"];
+    B --> D["'inputValue' initialized as ref('')"];
+    D --> E["Component Rendered in View"];
+    E --> F("User Input");
+    F --> G{"Press Enter Key"};
+    G -- "if (!inputValue.value)" --> H("Returns Early");
+    G -- "inputValue.value is truthy" --> I["'submitMessage()' Function Called"];
+     I --> J{"'emit('submit', inputValue.value)'"};
+    J --> K["'inputValue.value' Set to ''"];
+    K --> L("Return from 'submitMessage()'");
+    L --> M("Parent component handles submit event");
+     style I fill:#ccf, stroke:#333,stroke-width:2px
+    style A fill:#eee,stroke:#333,stroke-width:2px
+     style B fill:#eee,stroke:#333,stroke-width:2px
+    style K fill:#eee,stroke:#333,stroke-width:2px
