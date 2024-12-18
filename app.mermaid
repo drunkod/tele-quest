@@ -1,0 +1,16 @@
+graph LR
+    A[App.vue] --> B(AppContainer);
+    B --> C{TopBar v-if='me'};
+    C -- User Logged In --> D(TopBar Content);
+    C -- User Logged Out --> E[ the top bar is skipped];
+    D --> F{<p> me.profile?.name </p>};
+    D --> G(<button @click='logOut'>Log out</button>);
+    B --> H(<router-view />);
+     A --> I[useAccount]
+     I --> J{me}
+     I --> K{logOut}
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style C fill:#ccf,stroke:#333,stroke-width:1px
+    style D fill:#ddf,stroke:#333,stroke-width:1px
+     style I fill:#aaf,stroke:#333,stroke-width:1px

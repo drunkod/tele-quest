@@ -1,0 +1,8 @@
+graph LR
+    A[Browser URL] --> B(Router);
+    B -- Matches / --> C(Home Component);
+    B -- Matches /chat/:chatId --> D(Chat Component);
+    C --> E[Render in <router-view/>]
+    D --> E
+    E --> F(Display on Screen)
+    style B fill:#f9f,stroke:#333,stroke-width:2px

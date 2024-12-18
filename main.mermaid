@@ -1,0 +1,35 @@
+graph LR
+    A[main.ts: Import Modules] --> B(createJazzVueApp\nJazz Setup);
+    B --> C(Export useAccount, useCoState, JazzProvider);
+    C --> D{RootComponent: defineComponent};
+    D --> E(setup function\n -useDemoAuth to get authMethod and state);
+    E --> F{Render function};
+    F --> G[hJazzProvider];
+    G --> H(auth=authMethod.value\npeer='wss://cloud.jazz.tools/?key=chat-example-jazz@garden.co'\n default slot render App.vue);
+    H --> I[ hApp ];
+    F --> J{state.state !== 'signedIn'};
+    J -- true --> K[hDemoAuthBasicUI];
+    J -- false --> L[hApp];
+    K --> M(DemoAuthBasicUI render based on state);
+    I --> N(createAppRootComponent);
+    L --> N;
+    N --> O(app.userouter);
+    O --> P(app.mount'#app');
+    P --> Q(App mounted in index.html);
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#ccf,stroke:#333,stroke-width:2px
+    style C fill:#eef,stroke:#333,stroke-width:2px
+    style D fill:#f9f,stroke:#333,stroke-width:2px
+    style E fill:#ccf,stroke:#333,stroke-width:2px
+    style F fill:#eef,stroke:#333,stroke-width:2px
+     style G fill:#ccf,stroke:#333,stroke-width:2px
+      style H fill:#eef,stroke:#333,stroke-width:2px
+       style I fill:#ccf,stroke:#333,stroke-width:2px
+        style K fill:#f9f,stroke:#333,stroke-width:2px
+         style L fill:#ccf,stroke:#333,stroke-width:2px
+         style M fill:#eef,stroke:#333,stroke-width:2px
+    style N fill:#f9f,stroke:#333,stroke-width:2px
+     style O fill:#ccf,stroke:#333,stroke-width:2px
+     style P fill:#eef,stroke:#333,stroke-width:2px
+        style Q fill:#f9f,stroke:#333,stroke-width:2px 
+        
