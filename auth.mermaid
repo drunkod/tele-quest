@@ -1,0 +1,37 @@
+graph LR
+    A("main.ts: Module Imports") --> B("main.ts: Jazz Initialization");
+    B --> C("main.ts: RootComponent Setup");
+    C --> D{"useDemoAuth()"};
+    D --> E("Initial Auth State (signedOut)");
+    E --> F{state.state !== \'signedIn\'?};
+    F -- "Yes (Initial Render)" --> G["DemoAuthBasicUI Renders"];
+    F -- "No (User Signed In)" --> H["JazzProvider Renders"];
+     G --> I["User Interacts with DemoAuthBasicUI"];
+    I --> J{"Validation/Login"};
+     J --> K("useDemoAuth Updates 'state'");
+    K --> F;
+    K -- "state.state = signedIn" --> L["state.user is populated"];
+    L --> H;
+    H --> M["App Component Renders"]
+
+    M --> N{"User Clicks Log out?"};
+    N -- "No" --> O["App interaction"];
+    N -- "Yes" --> P("useDemoAuth Updates state (signedOut)");
+    P --> F;
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#ccf,stroke:#333,stroke-width:2px
+    style C fill:#fcf,stroke:#333,stroke-width:2px
+    style D fill:#cfc,stroke:#333,stroke-width:2px
+     style E fill:#9ff,stroke:#333,stroke-width:2px
+    style F fill:#c9c,stroke:#333,stroke-width:2px
+    style G fill:#ffa,stroke:#333,stroke-width:2px
+    style H fill:#aff,stroke:#333,stroke-width:2px
+        style I fill:#aaf,stroke:#333,stroke-width:2px
+    style J fill:#aca,stroke:#333,stroke-width:2px
+        style K fill:#aac,stroke:#333,stroke-width:2px
+ style L fill:#caa,stroke:#333,stroke-width:2px
+ style M fill:#aab,stroke:#333,stroke-width:2px
+ style N fill:#baa,stroke:#333,stroke-width:2px
+ style O fill:#cab,stroke:#333,stroke-width:2px
+ style P fill:#abc,stroke:#333,stroke-width:2px
