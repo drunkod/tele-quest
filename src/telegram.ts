@@ -1,10 +1,10 @@
-import { init as initSDK, retrieveLaunchParams, $debug } from '@telegram-apps/sdk-vue';
+import { init as initSDK, retrieveLaunchParams, setDebug } from '@telegram-apps/sdk-vue';
 import { backButton, viewport, themeParams, miniApp, initData } from '@telegram-apps/sdk-vue';
 
 export function initializeTelegram() {
   // Set debug mode based on URL param or dev environment
   const isDebug = retrieveLaunchParams().startParam === 'debug' || import.meta.env.DEV;
-  $debug.set(isDebug);
+  setDebug(isDebug);
 
   // Initialize SDK
   initSDK();
