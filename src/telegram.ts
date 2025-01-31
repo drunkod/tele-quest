@@ -3,10 +3,10 @@ import { backButton, viewport, themeParams, miniApp, initData } from '@telegram-
 
 export async function initializeTelegram() {
   try {
-    if (import.meta.env.DEV) {
-      const { setupMockEnvironment } = await import('./mockEnv');
-      setupMockEnvironment();
-    }
+    // if (import.meta.env.DEV) {
+    //   const { setupMockEnvironment } = await import('./mockEnv');
+    //   setupMockEnvironment();
+    // }
 
     const isDebug = retrieveLaunchParams().startParam === 'debug' || import.meta.env.DEV;
     setDebug(isDebug);
