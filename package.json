@@ -13,6 +13,7 @@
     "format-and-lint:fix": "biome check . --write"
   },
   "dependencies": {
+    "@telegram-apps/sdk-vue": "^2.0.5",
     "jazz-browser": "0.8.40",
     "jazz-tools": "0.8.39",
     "jazz-vue": "0.8.40",
