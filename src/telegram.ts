@@ -1,13 +1,26 @@
 import { init as initSDK, retrieveLaunchParams, setDebug } from '@telegram-apps/sdk-vue';
 import { backButton, viewport, themeParams, miniApp, initData } from '@telegram-apps/sdk-vue';
 
-export function initializeTelegram() {
-  // Set debug mode based on URL param or dev environment
-  const isDebug = retrieveLaunchParams().startParam === 'debug' || import.meta.env.DEV;
-  setDebug(isDebug);
+export async function initializeTelegram() {
+  try {
+    if (import.meta.env.DEV) {
+      const { setupMockEnvironment } = await import('./mockEnv');
+      setupMockEnvironment();
+    }
 
-  // Initialize SDK
-  initSDK();
+    const isDebug = retrieveLaunchParams().startParam === 'debug' || import.meta.env.DEV;
+    setDebug(isDebug);
+    
+    initSDK();
+    console.log('Telegram SDK initialized successfully');
+  } catch (error) {
+    console.error('Telegram SDK initialization failed:', error);
+    if (import.meta.env.DEV) {
+      console.info('In development mode - continuing with mock environment');
+    } else {
+      throw error;
+    }
+  }
 }
 
 export function mountTelegramComponents() {
