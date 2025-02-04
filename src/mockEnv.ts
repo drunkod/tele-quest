@@ -27,7 +27,7 @@ if (import.meta.env.DEV) {
       },
       tgWebAppVersion: '8',
       tgWebAppPlatform: 'tdesktop',
-      // Add mock init data
+      start_param: 'debug',
       tgWebAppData: {
         user: {
           id: 99281932,
@@ -36,8 +36,21 @@ if (import.meta.env.DEV) {
           username: 'testuser',
           language_code: 'en'
         },
-        auth_date: Date.now(),
-        hash: 'mock_hash'  // Mock hash for development
+        auth_date: Math.floor(Date.now() / 1000),
+        hash: 'mock_hash',
+        signature: 'mock_signature_123'
+      },
+      initDataUnsafe: {
+        query_id: 'mock_query_id',
+        user: {
+          id: 99281932,
+          first_name: 'Test',
+          last_name: 'User',
+          username: 'testuser',
+          language_code: 'en'
+        },
+        auth_date: Math.floor(Date.now() / 1000),
+        hash: 'mock_hash'
       }
     };
 
