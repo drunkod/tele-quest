@@ -1,4 +1,4 @@
-import { DemoAuthBasicUI, createJazzVueApp, useDemoAuth } from "jazz-vue";
+import { DemoAuthBasicUI, JazzProvider, useDemoAuth } from "jazz-vue";
 import { createApp, defineComponent, h, onMounted } from "vue";
 import App from "./App.vue";
 import "./index.css";
@@ -9,10 +9,6 @@ import { initializeTelegram, mountTelegramComponents } from './telegram';
 if (import.meta.env.DEV) {
   await import('./mockEnv');
 }
-
-const Jazz = createJazzVueApp();
-export const { useAccount, useCoState } = Jazz;
-const { JazzProvider } = Jazz;
 
 await initializeTelegram();
 
@@ -33,16 +29,22 @@ const RootComponent = defineComponent({
     });
 
     return () => [
-      h(JazzProvider, {
-        auth: authMethod.value,
-        peer: "wss://cloud.jazz.tools/?key=chat-example-jazz@garden.co",
-      }, {
-        default: () => h(App),
-      }),
-      state.state !== "signedIn" && h(DemoAuthBasicUI, {
-        appName: "Jazz Chat",
-        state,
-      }),
+      h(
+        JazzProvider,
+        {
+          auth: authMethod.value,
+          peer: "wss://cloud.jazz.tools/?key=chat-example-jazz@garden.co",
+        },
+        {
+          default: () => h(App),
+        },
+      ),
+
+      state.state !== "signedIn" &&
+        h(DemoAuthBasicUI, {
+          appName: "Jazz Chat",
+          state,
+        }),
     ];
   },
 });

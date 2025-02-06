@@ -14,4 +14,4 @@ import AppContainer from "./components/AppContainer.vue";
 import TopBar from "./components/TopBar.vue";
 
 const { me, logOut } = useAccount();
-</script>
+</script> 
